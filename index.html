@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Player with Custom Controls</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+</head>
+
+<body>
+
+    <!-- コントロールボタン -->
+    <div class="controls">
+        <label for="volume">🔊 音量: </label>
+        <input type="range" id="volume" min="0" max="100" value="50" oninput="setVolume(this.value)">
+        <label for="size">🖥️ サイズ: </label>
+        <input type="range" id="size" min="0" max="100" value="50" oninput="changeWidth(this.value)">
+    </div>
+
+    <!-- コントロールボタン -->
+    <div class="controls">
+        <button class="fancy-button btn-green" onclick="playVideo()">▶ 再生</button>
+        <button class="fancy-button btn-red" onclick="pauseVideo()">⏸ 一時停止</button>
+        <button class="fancy-button btn-blue" id="toggleLoop" onclick="toggleLoopButton()">ループ ✅</button>
+        <button class="fancy-button btn-gray" id="toggleCtrl" onclick="toggleCtrlButton()">タッチ抑制 ✅</button>
+    </div>
+
+    <!-- 動画変更用 -->
+    <div class="controls">
+        <label for="videoUrl">🎥 YouTube動画のURL:</label>
+        <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=動画ID">
+        <button onclick="loadNewVideo()">🎬 反映</button>
+    </div>
+
+    <!-- YouTubeプレイヤー -->
+    <div id="player" style="width: 50%; height: auto; aspect-ratio: 16/9;"></div>
+
+    <script src="./controller.js"></script>
+
+</body>
+
+</html>

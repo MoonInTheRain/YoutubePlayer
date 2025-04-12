@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+.controls {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.fancy-button {
+    padding: 0.5em 1.5em;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fancy-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fancy-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-blue {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+}
+
+.btn-blue:hover {
+    background: linear-gradient(135deg, #a777e3, #6e8efb);
+}
+
+.btn-green {
+    background: linear-gradient(135deg, #38ef7d, #11998e);
+}
+
+.btn-green:hover {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+}
+
+.btn-red {
+    background: linear-gradient(135deg, #f85032, #e73827);
+}
+
+.btn-red:hover {
+    background: linear-gradient(135deg, #e73827, #f85032);
+}
+
+.btn-yellow {
+    background: linear-gradient(135deg, #fddb3a, #f8b500);
+}
+
+.btn-yellow:hover {
+    background: linear-gradient(135deg, #f8b500, #fddb3a);
+}
+
+.btn-gray {
+    background: linear-gradient(135deg, #71777b, #2c3e50);
+}
+
+.btn-gray:hover {
+    background: linear-gradient(135deg, #2c3e50, #606364);
+}
