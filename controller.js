@@ -60,11 +60,22 @@ function extractVideoId(url) {
     return match ? match[1] : null;
 }
 
-function loadNewVideo() {
+function pasteFromClipboard() {
+    navigator.clipboard.readText().then(text => {
+        const input = document.getElementById("videoUrl");
+        input.value = text;
+    }).catch(err => {
+        alert("クリップボードの読み取りに失敗しました");
+        console.error(err);
+    });
+}
+
+function addNewVideo() {
     const url = document.getElementById("videoUrl").value;
     const videoId = extractVideoId(url);
-
-    loadVideoById(videoId);
+    items.push({title: videoId.toString(), url: videoId});
+    saveItems();     // 順番を保存
+    renderItems();   // 表示を再構築
 }
 
 function loadVideoById(videoId) {
