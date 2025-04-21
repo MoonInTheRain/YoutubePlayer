@@ -90,10 +90,17 @@ li {
     justify-content: space-between;
     align-items: center;
     border-radius: 4px;
-    cursor: grab;
+    cursor: default;
 }
 
 .button-group {
   display: flex;
   gap: 5px; /* ボタン間の余白 */
+}
+
+.drag-handle {
+    cursor: grab;
+    padding: 8px 12px;        /* タッチ範囲 */
+    margin-right: 10px;
+    user-select: none;
 }

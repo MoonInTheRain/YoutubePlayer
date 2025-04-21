@@ -161,7 +161,13 @@ function renderItems() {
     itemList.innerHTML = ""; // 一旦クリア
     items.forEach((item, index) => {
         const li = document.createElement("li");
-        li.textContent = item.title;
+
+        const dragHandle = document.createElement("span");
+        dragHandle.className = "drag-handle";
+        dragHandle.textContent = "☰";
+
+        const title = document.createElement("span");
+        title.textContent = item.title;
 
         const nowPlaying = playingIndex == index;
 
@@ -195,6 +201,8 @@ function renderItems() {
         buttonGroup.appendChild(delBtn);
 
         li.style.background = nowPlaying ? "yellow": "#dcdcdc";
+        li.appendChild(dragHandle);
+        li.appendChild(title);
         li.appendChild(buttonGroup);
         itemList.appendChild(li);
     });
@@ -232,6 +240,7 @@ function loadItems() {
 
 new Sortable(itemList, {
     animation: 150,
+    handle: ".drag-handle", // ← これが重要！
     onEnd: function (evt) {
         const oldIndex = evt.oldIndex;
         const newIndex = evt.newIndex;
