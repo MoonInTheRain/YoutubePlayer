@@ -172,7 +172,7 @@ function renderItems() {
         const nowPlaying = playingIndex == index;
 
         const delBtn = document.createElement("button");
-        delBtn.classList.add('fancy-button');
+        delBtn.classList.add('fancy-button-small');
         delBtn.classList.add('btn-red');
         delBtn.textContent = "🗑️";
         delBtn.onclick = () => {
@@ -186,7 +186,7 @@ function renderItems() {
         };
 
         const openBtn = document.createElement("button");
-        openBtn.classList.add('fancy-button');
+        openBtn.classList.add('fancy-button-small');
         openBtn.classList.add('btn-green');
         openBtn.textContent = "▶";
         openBtn.onclick = () => {
