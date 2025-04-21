@@ -36,7 +36,6 @@ function onYouTubeIframeAPIReady() {
             'onReady': function (event) {
                 event.target.setVolume(savedVolume);
                 document.getElementById("volume").value = savedVolume;
-                document.getElementById("videoUrl").value = `https://www.youtube.com/watch?v=${savedVideoId}`;
                 document.getElementById("size").value = savedSize;
             },
             'onStateChange': onPlayerStateChange
@@ -80,18 +79,19 @@ function pasteFromClipboard() {
 }
 
 function addNewVideo() {
-    const url = document.getElementById("videoUrl").value;
+    const input = document.getElementById("videoUrl");
+    const url = input.value;
     const videoId = extractVideoId(url);
-    items.push({title: videoId.toString(), url: videoId});
+    items.push({title: "【不明】（一度再生すると表示されます）", url: videoId});
     saveItems();     // 順番を保存
     renderItems();   // 表示を再構築
+    input.value = "";
 }
 
 function loadVideoById(index) {
     const target = items[index];
     if (target) {
         player.loadVideoById(target.url);
-        localStorage.setItem("videoId", target.url);
     } else {
         alert("有効なYouTube URLを入力してください。");
     }
@@ -276,6 +276,14 @@ new Sortable(itemList, {
         const newIndex = evt.newIndex;
 
         if (oldIndex === newIndex) return;
+
+        if (playingIndex == oldIndex) {
+            playingIndex = newIndex
+        } else if (playingIndex < oldIndex && playingIndex >= newIndex) {
+            playingIndex++;
+        } else if (playingIndex > oldIndex && playingIndex <= newIndex) {
+            playingIndex--;
+        }
 
         const movedItem = items.splice(oldIndex, 1)[0]; // 元の位置から削除して
         items.splice(newIndex, 0, movedItem);           // 新しい位置に挿入
