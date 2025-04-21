@@ -152,25 +152,39 @@ function renderItems() {
         const li = document.createElement("li");
         li.textContent = item.title;
 
+        const nowPlaying = playingIndex == index;
+
         const delBtn = document.createElement("button");
-        delBtn.textContent = "削除";
+        delBtn.classList.add('fancy-button');
+        delBtn.classList.add('btn-red');
+        delBtn.textContent = "🗑️";
         delBtn.onclick = () => {
-            items.splice(index, 1); // データから削除
-            renderItems();          // 再描画
-            saveItems();            // localStorageへ保存
+            if (playingIndex == index) {
+                alert("再生中の動画は削除できません。")
+            } else {
+                items.splice(index, 1); // データから削除
+                renderItems();          // 再描画
+                saveItems();            // localStorageへ保存
+            }
         };
 
         const openBtn = document.createElement("button");
-        openBtn.textContent = "開く";
+        openBtn.classList.add('fancy-button');
+        openBtn.classList.add('btn-green');
+        openBtn.textContent = "▶";
         openBtn.onclick = () => {
             playingIndex = index;
             loadVideoById(item.url);
             renderItems();          // 再描画
         };
 
-        li.style.background = playingIndex == index ? "yellow": "#dcdcdc";
-        li.appendChild(openBtn);
-        li.appendChild(delBtn);
+        const buttonGroup = document.createElement("div");
+        buttonGroup.className = "button-group";
+        buttonGroup.appendChild(openBtn);
+        buttonGroup.appendChild(delBtn);
+
+        li.style.background = nowPlaying ? "yellow": "#dcdcdc";
+        li.appendChild(buttonGroup);
         itemList.appendChild(li);
     });
 }

@@ -92,3 +92,8 @@ li {
     border-radius: 4px;
     cursor: grab;
 }
+
+.button-group {
+  display: flex;
+  gap: 5px; /* ボタン間の余白 */
+}
