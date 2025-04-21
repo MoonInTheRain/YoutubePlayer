@@ -30,12 +30,14 @@
     <div class="controls">
         <label for="videoUrl">🎥 YouTube動画のURL:</label>
         <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=動画ID">
-        <button onclick="loadNewVideo()">🎬 反映</button>
+        <button onclick="pasteFromClipboard()">📋 貼り付け</button>
+        <button onclick="addNewVideo()">追加</button>
     </div>
 
     <!-- YouTubeプレイヤー -->
     <div id="player" style="width: 50%; height: auto; aspect-ratio: 16/9;"></div>
-
+    <ul id="itemList"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="./controller.js"></script>
 
 </body>

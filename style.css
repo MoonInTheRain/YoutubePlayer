@@ -27,6 +27,19 @@ input[type="text"] {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
+.fancy-button-small {
+    padding: 0.5em 0.5em;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 60px;
+}
+
 .fancy-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
@@ -75,4 +88,41 @@ input[type="text"] {
 
 .btn-gray:hover {
     background: linear-gradient(135deg, #2c3e50, #606364);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #f0f0f0;
+    margin: 5px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.button-group {
+  display: flex;
+  gap: 5px; /* ボタン間の余白 */
+}
+
+.drag-handle {
+    cursor: grab;
+    padding: 8px 12px;        /* タッチ範囲 */
+    margin-right: 10px;
+    user-select: none;
+}
+
+/* 画面幅が 400px 以下の場合は縦並び */
+@media (max-width: 400px) {
+    .button-group {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-end; /* ボタンを右寄せに保つなら */
+    }
 }
