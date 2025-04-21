@@ -5,6 +5,14 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 const itemList = document.getElementById("itemList");
 
+initialized = false;
+
+const LoopType = {
+    NONE: "none",
+    ONCE: "once",
+    ALL: "all"
+};
+
 // 表示対象のデータ（リストと同期される）
 let items = [
     { title: "hoge1", url: "63X7Ev0-gGE" },
@@ -13,7 +21,8 @@ let items = [
 
 var player;
 function onYouTubeIframeAPIReady() {
-    const savedVideoId = localStorage.getItem("videoId") || '_QIQk3StRmc';
+    initialize();
+    const savedVideoId = items[playingIndex].url;
     const savedVolume = localStorage.getItem("volume") || 50;
     const savedSize = localStorage.getItem("size") || 50;
     changeWidth(savedSize);
@@ -78,34 +87,41 @@ function addNewVideo() {
     renderItems();   // 表示を再構築
 }
 
-function loadVideoById(videoId) {
-    if (videoId) {
-        player.loadVideoById(videoId);
-        localStorage.setItem("videoId", videoId);
+function loadVideoById(index) {
+    const target = items[index];
+    if (target) {
+        player.loadVideoById(target.url);
+        localStorage.setItem("videoId", target.url);
     } else {
         alert("有効なYouTube URLを入力してください。");
     }
 }
 
+var loop = localStorage.getItem("loop");
+
 function toggleLoopButton() {
-    const toggleLoop = document.getElementById('toggleLoop');
-    const isOn = toggleLoop.classList.contains('on');
-    setLoop(!isOn);
+    if (loop == LoopType.ALL) {
+        setLoop(LoopType.ONCE);
+    } else if (loop == LoopType.ONCE) {
+        setLoop(LoopType.NONE);
+    } else {
+        setLoop(LoopType.ALL);
+    }
 }
 
-var loop = localStorage.getItem("loop") == "true";
 function setLoop(value) {
     const toggleLoop = document.getElementById('toggleLoop');
-
-    loop = value;
-    localStorage.setItem("loop", value ? "true" : "false");
-    if (value) {
-        toggleLoop.classList.add('on');
-        toggleLoop.textContent = "ループ ✅"
+    if (value == LoopType.ALL) {
+        loop = LoopType.ALL;
+        toggleLoop.textContent = "ループ 🔁";
+    } else if (value == LoopType.ONCE) {
+        loop = LoopType.ONCE;
+        toggleLoop.textContent = "ループ 🔂";
     } else {
-        toggleLoop.classList.remove('on');
-        toggleLoop.textContent = "ループ ❌"
+        loop = LoopType.NONE;
+        toggleLoop.textContent = "ループ ❌";
     }
+    localStorage.setItem("loop", loop);
 }
 setLoop(loop);
 
@@ -149,9 +165,23 @@ function onPlayerStateChange(event) {
             renderItems();   // 表示を再構築
         }
     }
-    if (loop && event.data === YT.PlayerState.ENDED) {
-        player.seekTo(0); // 動画の最初に戻す
-        player.playVideo(); // 再生開始
+    if (event.data === YT.PlayerState.ENDED) {
+        if (loop == LoopType.ONCE) {
+            player.seekTo(0); // 動画の最初に戻す
+            player.playVideo(); // 再生開始
+        } else {
+            playingIndex++;
+            const isFinish = items.length <= playingIndex;
+            if (isFinish) {
+                if (loop == LoopType.ALL) {
+                    playingIndex = 0;
+                } else {
+                    return;
+                }
+            }
+            loadVideoById(playingIndex);
+            renderItems();
+        }
     }
 }
 
@@ -191,8 +221,8 @@ function renderItems() {
         openBtn.textContent = "▶";
         openBtn.onclick = () => {
             playingIndex = index;
-            loadVideoById(item.url);
-            renderItems();          // 再描画
+            loadVideoById(index);
+            renderItems();
         };
 
         const buttonGroup = document.createElement("div");
@@ -230,12 +260,12 @@ function saveItems() {
     localStorage.setItem("myItems", JSON.stringify(items));
 }
 
-function loadItems() {
+function initialize() {
+    if (initialized) { return; }
     const saved = localStorage.getItem("myItems");
     if (saved) {
         items = JSON.parse(saved);
     }
-    renderItems();
 }
 
 new Sortable(itemList, {
@@ -256,5 +286,6 @@ new Sortable(itemList, {
 });
 
 window.onload = () => {
-    loadItems();
+    initialize();
+    renderItems();
 };
