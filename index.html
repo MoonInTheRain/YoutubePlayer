@@ -14,10 +14,12 @@
 <body>
 
     <!-- コントロールボタン -->
-    <div class="controls">
-        <label for="volume">🔊 音量: </label>
+    <div class="sliders">
+        <label for="volume">🔊 音量</label>
         <input type="range" id="volume" min="0" max="100" value="50" oninput="setVolume(this.value)">
-        <label for="size">🖥️ サイズ: </label>
+    </div>
+    <div class="sliders">
+        <label for="size">🖥️ サイズ</label>
         <input type="range" id="size" min="0" max="100" value="50" oninput="changeWidth(this.value)">
     </div>
 

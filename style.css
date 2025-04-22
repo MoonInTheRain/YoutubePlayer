@@ -9,6 +9,26 @@ body {
     margin-bottom: 10px;
 }
 
+.sliders {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 8px;
+}
+
+/* ラベルの幅を固定にして、全体を揃える */
+.sliders label {
+    display: inline-block;
+    width: 80px;
+    /* 必要に応じて調整 */
+    font-weight: bold;
+}
+
+/* スライダーを伸ばして均等に並べる */
+.sliders input[type="range"] {
+    flex: 1;
+}
+
 input[type="text"] {
     width: 300px;
     padding: 5px;
@@ -17,7 +37,7 @@ input[type="text"] {
 
 .fancy-button {
     padding: 0.5em 0.5em;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #fff;
     border: none;
@@ -25,7 +45,7 @@ input[type="text"] {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    width: 170px;
+    width: 160px;
     margin: 5px 0px;
 }
 
