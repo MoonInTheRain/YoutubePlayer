@@ -16,7 +16,7 @@ input[type="text"] {
 }
 
 .fancy-button {
-    padding: 0.5em 1.5em;
+    padding: 0.5em 0.5em;
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
@@ -25,6 +25,8 @@ input[type="text"] {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 170px;
+    margin: 5px 0px;
 }
 
 .fancy-button-small {
