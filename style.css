@@ -45,8 +45,15 @@ input[type="text"] {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    width: 160px;
+    width: 20vw;
     margin: 5px 0px;
+}
+
+@media (max-aspect-ratio: 3/4) {
+    /* ここは縦長（高さが幅より大きい） */
+    .fancy-button {
+        width: 40vw;
+    }
 }
 
 .fancy-button-small {
